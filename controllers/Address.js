@@ -48,10 +48,7 @@ module.exports = {
   },
   find: async (req, res) => {
     const { address } = req.query.address;
-    const foundAddresses = await Address.aggregate([
-      { $match: { ethereum: address } },
-    ]);
-
+    const foundAddresses = await Address.findOne({ ethereum: address });
     if (!foundAddresses) {
       return res.status(404).send("No user found");
     }
